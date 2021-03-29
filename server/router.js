@@ -1,14 +1,3 @@
-const express = require("express");
-const { User } = require("../models/user");
-const { router } = require("../models/user");
-
-const app = express();
-const PORT = process.env.PORT || 8080;
-
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
 app.post("/user", async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -36,8 +25,4 @@ app.get("/user/:userId", async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`SERVER RUNNING ON PORT: ${PORT}`);
 });
