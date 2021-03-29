@@ -6,10 +6,10 @@ const { Client } = require("pg");
 const app = express();
 const PORT = 3333;
 
-const DB_URL = process.env.DB_URL || "";
+const DATABASE_URL = process.env.DATABASE_URL || "";
 
 const client = new Client({
-  connectionString: DB_URL,
+  connectionString: DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
