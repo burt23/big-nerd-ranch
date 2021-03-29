@@ -4,7 +4,7 @@ const { User } = require("../models/user");
 const { Client } = require("pg");
 
 const app = express();
-const PORT = 3333;
+const PORT = 8080;
 
 const DATABASE_URL = process.env.DATABASE_URL || "";
 
