@@ -1,14 +1,32 @@
 const express = require("express");
 const Sequelize = require("sequelize");
 const { User } = require("../models/user");
+const { Client } = require("pg");
 
 const app = express();
-const port = 8888;
+const PORT = 3333;
 
-const USER = process.env.DBUSER || "dashurpa";
-// const PASSWORD = process.env.DBPASS;
+const DB_URL = process.env.DB_URL || "";
 
-const sequelize = new Sequelize(`postgres://${USER}@localhost:5432/test`);
+const client = new Client({
+  connectionString: DB_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+client.connect();
+
+client.query(
+  "SELECT table_schema,table_name FROM information_schema.tables;",
+  (err, res) => {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    client.end();
+  }
+);
 
 app.get("/", (req, res) => {
   res.send("hello world");
@@ -43,15 +61,6 @@ app.get("/user/:userId", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`SERVER RUNNING ON PORT: ${port}`);
+app.listen(PORT, () => {
+  console.log(`SERVER RUNNING ON PORT: ${PORT}`);
 });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
