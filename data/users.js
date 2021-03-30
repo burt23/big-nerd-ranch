@@ -1,22 +1,22 @@
 const users = [
   {
     name: "janedoe",
-    email: "test@gmail.com",
+    email: "tst@mail.com",
     expertise: "Go",
   },
   {
     name: "bobdole",
-    email: "new@gmail.com",
+    email: "n@gil.com",
     expertise: "Rust",
   },
   {
     name: "queenb",
-    email: "hello@gmail.com",
+    email: "heo@ail.com",
     expertise: "Ruby",
   },
   {
     name: "photon",
-    email: "test@protonmail.com",
+    email: "te@ptonmail.com",
     expertise: "Flask",
   },
 ];

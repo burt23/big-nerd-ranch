@@ -21,7 +21,10 @@ class User extends Model {}
 
 User.init(
   {
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,7 +34,10 @@ User.init(
           msg: "Must be a valid email address",
         },
       },
-      expertise: DataTypes.ENUM(languages),
+    },
+    expertise: {
+      type: DataTypes.ENUM(languages),
+      allowNull: false,
     },
   },
   { sequelize, modelName: "user" }
@@ -45,7 +51,10 @@ sequelize
   .sync()
   .then(() => {
     users.forEach(async (user) => {
+      console.log("creating user...", user);
       await User.create(user);
+      console.log("created user!");
     });
   })
-  .then((u) => u.toJSON());
+  .then(console.log)
+  .catch(console.error);

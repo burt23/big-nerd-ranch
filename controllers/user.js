@@ -10,8 +10,8 @@ const addUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     const formattedError = `Unable to create new user\n 
-      incoming query: ${query} \n 
-      error: ${error}`;
+      incoming query: ${JSON.stringify(req.query)} \n 
+      error: ${JSON.stringify(error)}`;
     res.status(404).send(formattedError);
   }
 };
@@ -19,7 +19,7 @@ const addUser = async (req, res) => {
 const getUser = async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = await User.findAll({
+    const user = await client.findAll({
       where: {
         id: userId,
       },
@@ -37,9 +37,8 @@ const getUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const query = "SELECT * FROM users";
-    const users = client.query(query);
-    console.log("retrieving users", { users });
-    res.json({ users }); // Returns the new user that is created in the database
+    const users = await User.findAll({ query });
+    res.json(users); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
     const formattedError = `Unable to select * users\n 
