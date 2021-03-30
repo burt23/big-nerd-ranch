@@ -1,4 +1,3 @@
-const client = require("../db");
 const User = require("../models/user");
 
 const addUser = async (req, res) => {
@@ -24,7 +23,7 @@ const getUser = async (req, res) => {
         id: userId,
       },
     });
-    res.json({ user });
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     const formattedError = `Unable to get new user\n 
