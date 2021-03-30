@@ -15,6 +15,10 @@ router.post("/user", async (req, res) => {
     res.json({ user }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
+    const formattedError = `Unable to create new user\n 
+      incoming query: ${query} \n 
+      error: ${error}`;
+    res.status(404).send(formattedError);
   }
 });
 
@@ -29,6 +33,10 @@ router.get("/user/:userId", async (req, res) => {
     res.json({ user });
   } catch (error) {
     console.error(error);
+    const formattedError = `Unable to get new user\n 
+      incoming userId: ${userId} \n 
+      error: ${error}`;
+    res.status(404).send(formattedError);
   }
 });
 
@@ -40,6 +48,9 @@ router.get("/users", async (req, res) => {
     res.json({ users }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
+    const formattedError = `Unable to select * users\n 
+      error: ${error}`;
+    res.status(404).send(formattedError);
   }
 });
 
