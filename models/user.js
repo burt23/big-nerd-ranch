@@ -1,5 +1,6 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const DATABASE_URL = require("../config");
+const users = require("../data/users");
 
 const sequelize = new Sequelize(DATABASE_URL);
 
@@ -39,10 +40,12 @@ User.init(
 console.log("usermodel", User === sequelize.models.User); // true
 
 module.exports = User;
-// (async () => {
-//   await sequelize.sync();
-//   const jane = await User.create({
-//     username: "janedoe",
-//     birthday: new Date(1980, 6, 20),
-//   });
-// })();
+
+sequelize
+  .sync()
+  .then(() => {
+    users.forEach(async (user) => {
+      await User.create(user);
+    });
+  })
+  .then((u) => u.toJSON());

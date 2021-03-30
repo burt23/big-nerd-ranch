@@ -14,9 +14,10 @@ try {
   throw new Error("Unable to connect to db... \nError: ", error);
 }
 
-client.query(
-  "SELECT table_schema,table_name FROM information_schema.tables;",
-  (err, res) => {
+const query = "SELECT table_schema, table_name FROM information_schema.tables;";
+
+try {
+  client.query(query, (err, res) => {
     try {
       if (err) throw err;
       for (let row of res.rows) {

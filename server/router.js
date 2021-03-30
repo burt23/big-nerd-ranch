@@ -1,6 +1,6 @@
 const express = require("express");
 const client = require("../db");
-const User = require("../db");
+const User = require("../models/user");
 var router = express.Router();
 
 router.get("/", (req, res) => {
@@ -9,12 +9,9 @@ router.get("/", (req, res) => {
 
 router.post("/user", async (req, res) => {
   try {
-    const { body } = req;
-    console.log("saving user", body);
-    const user = new User(body);
-    console.log("new user", { user });
+    const { query } = req;
+    const user = new User(query);
     await user.save();
-    console.log("saved user");
     res.json({ user }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
