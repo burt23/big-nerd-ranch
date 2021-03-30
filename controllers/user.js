@@ -17,9 +17,9 @@ const addUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const userId = req.params.userId;
   try {
-    const user = await client.findAll({
+    const userId = req.params.userId;
+    const user = await User.findAll({
       where: {
         id: userId,
       },
