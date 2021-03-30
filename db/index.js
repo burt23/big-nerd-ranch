@@ -16,19 +16,17 @@ try {
 
 const query = "SELECT table_schema, table_name FROM information_schema.tables;";
 
-try {
-  client.query(query, (err, res) => {
-    try {
-      if (err) throw err;
-      for (let row of res.rows) {
-        console.log(JSON.stringify(row));
-      }
-      client.end();
-    } catch (error) {
-      console.error("Error querying postgres client:", error);
-      throw new Error(error);
+client.query(query, (err, res) => {
+  try {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
     }
+    client.end();
+  } catch (error) {
+    console.error("Error querying postgres client:", error);
+    throw new Error(error);
   }
-);
+});
 
 module.exports = client;
