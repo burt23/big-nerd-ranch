@@ -1,4 +1,6 @@
 const express = require("express");
+const { client } = require("../db");
+const User = require("../db");
 var router = express.Router();
 
 router.get("/", (req, res) => {
@@ -7,10 +9,13 @@ router.get("/", (req, res) => {
 
 router.post("/user", async (req, res) => {
   try {
-    const newUser = new User(req.body);
-    console.log("new user", { newUser });
-    await newUser.save();
-    res.json({ user: newUser }); // Returns the new user that is created in the database
+    const { body } = req;
+    console.log("saving user", body);
+    const user = new User(body);
+    console.log("new user", { user });
+    await user.save();
+    console.log("saved user");
+    res.json({ user }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
   }
@@ -25,6 +30,17 @@ router.get("/user/:userId", async (req, res) => {
       },
     });
     res.json({ user });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.get("/users", async (req, res) => {
+  try {
+    const query = "SELECT * FROM users";
+    const users = client.query(query);
+    console.log("retrieving users", { users });
+    res.json({ users }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
   }
