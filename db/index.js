@@ -23,7 +23,7 @@ client.query(query, (err, res) => {
     client.end();
   } catch (error) {
     console.error("Error querying postgres client:", error);
-    throw new Error(error);
+    res.status(4040).send(error);
   }
 });
 
