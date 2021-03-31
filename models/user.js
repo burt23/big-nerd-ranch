@@ -1,8 +1,5 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const DATABASE_URL = require("../config");
-const users = require("../data/users");
-
-const sequelize = new Sequelize(DATABASE_URL);
+const { Model, DataTypes } = require("sequelize");
+const client = require("../db");
 
 const languages = [
   "node.js",
@@ -40,19 +37,7 @@ User.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "user" }
+  { sequelize: client, modelName: "user" }
 );
 
 module.exports = User;
-
-// seeds db with mock users
-sequelize
-  .sync()
-  .then(() => {
-    users.forEach(async (user) => {
-      console.log("creating user...", user);
-      await User.create(user);
-      console.log("created user!");
-    });
-  })
-  .catch(console.error);

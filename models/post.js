@@ -1,7 +1,5 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const DATABASE_URL = require("../config");
-
-const sequelize = new Sequelize(DATABASE_URL);
+const { Model, DataTypes } = require("sequelize");
+const client = require("../db");
 
 class Post extends Model {}
 
@@ -20,7 +18,7 @@ Post.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "post" }
+  { sequelize: client, modelName: "post" }
 );
 
 module.exports = Post;
