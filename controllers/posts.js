@@ -3,12 +3,12 @@ const Post = require("../models/post");
 const addPost = async (req, res) => {
   try {
     const { query } = req;
-    const post = new User(query);
+    const post = new Post(query);
     await post.save();
     res.status(201).json({ post });
   } catch (error) {
     console.error(error);
-    const formattedError = `Unable to create new user\n 
+    const formattedError = `Unable to create new post\n 
       incoming query: ${JSON.stringify(req.query)} \n 
       error: ${JSON.stringify(error)}`;
     res.status(404).send(formattedError);
@@ -36,7 +36,7 @@ const getPost = async (req, res) => {
 const getPosts = async (req, res) => {
   try {
     const posts = await Post.findAll();
-    res.json(posts); // Returns the new user that is created in the database
+    res.json(posts); // Returns all posts
   } catch (error) {
     console.error(error);
     const formattedError = `Unable to select * posts\n 

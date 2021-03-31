@@ -40,4 +40,6 @@ User.init(
   { sequelize: client, modelName: "user" }
 );
 
+client.sync();
+
 module.exports = User;

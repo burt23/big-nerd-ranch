@@ -6,7 +6,7 @@ class Post extends Model {}
 Post.init(
   {
     userId: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     title: {
@@ -20,5 +20,7 @@ Post.init(
   },
   { sequelize: client, modelName: "post" }
 );
+
+client.sync();
 
 module.exports = Post;
