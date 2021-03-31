@@ -5,7 +5,7 @@ const addUser = async (req, res) => {
     const { query } = req;
     const user = new User(query);
     await user.save();
-    res.json({ user }); // Returns the new user that is created in the database
+    res.status(201).json({ user }); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
     const formattedError = `Unable to create new user\n 
