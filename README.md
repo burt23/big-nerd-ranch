@@ -49,3 +49,8 @@ GET https://bignerdranch.herokuapp.com/posts/:postId
 ## A Note on Making POST Requests
 
 The API is enforcing validation on both posts and users. Also, it will expect POST information to be sent as query params rather than in the body of the post. Please adhere to this format when making POST calls to the API
+
+## Next steps
+
+Given more time this API would likely grow to include additional libraries and functionality.
+Such efforts would likely include authentication via JWTs, a content security policy library (CSP), as well as Swagger UI documentation. Further work on error handling and logging would also be nice additions to the API.
