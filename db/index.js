@@ -1,9 +1,13 @@
 const { Client } = require("pg");
-const DATABASE_URL = require("../config");
 
 const client = new Client({
-  connectionString: DATABASE_URL,
+  user: "ylosjnofgcrrof",
+  password: "072ec37f72671bf5e6e30d1a662bdd3333b53e3a1b50c0525a6a021424abcd97",
+  database: "da7jnpbrfjqqoi",
+  port: 5432,
+  ssl: true,
   rejectUnauthorized: false,
+  host: "ec2-3-91-127-228.compute-1.amazonaws.com",
 });
 
 try {

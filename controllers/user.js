@@ -35,8 +35,7 @@ const getUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const query = "SELECT * FROM users";
-    const users = await User.findAll({ query });
+    const users = await User.findAll();
     res.json(users); // Returns the new user that is created in the database
   } catch (error) {
     console.error(error);
