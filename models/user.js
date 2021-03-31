@@ -43,10 +43,9 @@ User.init(
   { sequelize, modelName: "user" }
 );
 
-console.log("usermodel", User === sequelize.models.User); // true
-
 module.exports = User;
 
+// seeds db with mock users
 sequelize
   .sync()
   .then(() => {
@@ -56,5 +55,4 @@ sequelize
       console.log("created user!");
     });
   })
-  .then(console.log)
   .catch(console.error);
