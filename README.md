@@ -32,3 +32,20 @@ If you are encountering SSL issues in connecting to the Heroku DB, an additional
 ```bash
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
+
+## Heroku
+
+This application is currently deployed to Heroku and is available at the link below.
+https://bignerdranch.herokuapp.com/
+
+available endpoints include...
+GET https://bignerdranch.herokuapp.com/users
+GET https://bignerdranch.herokuapp.com/user/:userId
+POST https://bignerdranch.herokuapp.com/user
+POST https://bignerdranch.herokuapp.com/post
+GET https://bignerdranch.herokuapp.com/posts
+GET https://bignerdranch.herokuapp.com/posts/:postId
+
+## A Note on Making POST Requests
+
+The API is enforcing validation on both posts and users. Also, it will expect POST information to be sent as query params rather than in the body of the post. Please adhere to this format when making POST calls to the API
