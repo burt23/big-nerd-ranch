@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const client = require("../db");
+const posts = require("../data/posts");
 
 class Post extends Model {}
 
@@ -21,6 +22,14 @@ Post.init(
   { sequelize: client, modelName: "post" }
 );
 
-client.sync();
+Post.sync()
+  .then(() => {
+    posts.forEach(async (post) => {
+      console.log("creating post...", post);
+      await Post.create(post);
+      console.log("created post!");
+    });
+  })
+  .catch((error) => console.error("unable to seed posts into db...", error));
 
 module.exports = Post;

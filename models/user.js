@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const client = require("../db");
+const users = require("../data/users");
 
 const languages = [
   "node.js",
@@ -40,6 +41,14 @@ User.init(
   { sequelize: client, modelName: "user" }
 );
 
-client.sync();
+User.sync()
+  .then(() => {
+    users.forEach(async (user) => {
+      console.log("creating user...", user);
+      await User.create(user);
+      console.log("created user!");
+    });
+  })
+  .catch((error) => console.error("unable to seed users into db...", error));
 
 module.exports = User;
